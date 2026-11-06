@@ -1,0 +1,13 @@
+name: Build
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cl /O2 /MT Omega_3r4b.cpp /Fe:Omega_3r4b.exe /link /SUBSYSTEM:WINDOWS advapi32.lib psapi.lib
+        shell: cmd
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Omega_3r4b
+          path: Omega_3r4b.exe
